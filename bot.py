@@ -12,6 +12,13 @@ def main():
     # Conecta el socket al servidor
     s.connect((host, port))
 
+    # Importa el módulo bot
+    filename = "bot.py"
+    bot = importlib.import_lib(filename)
+
+    # Ejecuta el bot
+    bot.run()
+    
     # Crea un bucle infinito para recibir y enviar datos
     while True:
         # Recibe datos del servidor
