@@ -1,7 +1,7 @@
 import socket
 import subprocess
 
-def main():
+def run():
     # Define la dirección IP y el puerto del servidor
     host = "172.16.22.140"
     port = 555
