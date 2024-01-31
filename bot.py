@@ -28,9 +28,9 @@ def run(ip, port):
         s.sendall(err)
 
 def main():
-    # Solicitar al usuario la IP y el puerto
+    # Solicitar la IP y el puerto
     ip = input("Introduzca la IP: ")
-    port = int(input("Introduzca el puerto: "))
+    port = int(input("Introduzca el puerto: "))  # Convertir a entero
 
     # Importar el módulo bot
     bot = __import__("bot")
