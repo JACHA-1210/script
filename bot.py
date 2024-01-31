@@ -5,7 +5,7 @@ import subprocess
 import importlib
 import bot  # Importa directamente el módulo bot
 
-def run_bot():
+def run():
     # Define la dirección IP y el puerto del servidor
     host = "172.16.22.190"
     port = 5555
