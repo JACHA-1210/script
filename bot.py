@@ -15,8 +15,8 @@ def run_bot():
         s.connect((host, port))
 
         # Importa el módulo bot
-        filename = "bot"
-        bot = importlib.import_module(filename)
+        filename = "bot.py"
+        bot.py = importlib.import_module(filename)
 
         # Ejecuta el bot
         bot.run()
