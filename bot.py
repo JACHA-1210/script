@@ -1,28 +1,53 @@
+# main.py
+
 import socket
+import subprocess
+import importlib
+import bot  # Importa directamente el módulo bot
 
-# Dirección IP y Puerto para Escuchar
-host = "192.168.249.128"
-port = 5555
+def run_bot():
+    # Define la dirección IP y el puerto del servidor
+    host = "192.168.249.128"
+    port = 5555
 
-def start_server():
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((host, port))
-    s.listen(5)
+    try:
+        # Crea un socket TCP/IP
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    print(f"Server listening on {host}:{port}")
+        # Conecta el socket al servidor
+        s.connect((host, port))
 
-    client_socket, addr = s.accept()
-    print(f"Connection from {addr}")
+        # Importa el módulo bot
+        importlib.reload(bot)
 
-    while True:
-        command = input("Enter command (type 'exit' to end): ")
-        client_socket.sendall(command.encode())
-        if command.lower() == "exit":
-            break
-        output = client_socket.recv(1024).decode()
-        print(output)
+        # Ejecuta el bot
+        bot.run()
 
-    client_socket.close()
+        # Crea un bucle infinito para recibir y enviar datos
+        while True:
+            # Recibe datos del servidor
+            data = s.recv(1024)
+
+            # Si no hay datos, la conexión se ha cerrado
+            if not data:
+                break
+
+            # Imprime los datos recibidos
+            print(data.decode())
+
+            # Envia los datos de entrada al servidor
+            command = input("Ingrese el comando a enviar al servidor: ")
+            s.sendall(command.encode())
+
+            # Recibe y muestra la salida del comando ejecutado en el servidor
+            output = s.recv(1024)
+            print(output.decode())
+
+    except ConnectionRefusedError:
+        print("Error: No se pudo establecer la conexión. Asegúrate de que el servidor esté en ejecución.")
+    finally:
+        # Cierra la conexión al salir del bucle
+        s.close()
 
 if __name__ == "__main__":
-    start_server()
+    run_bot()
