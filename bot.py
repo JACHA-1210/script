@@ -1,6 +1,9 @@
+# main.py
+
 import socket
 import subprocess
 import importlib
+import bot  # Importa directamente el módulo bot
 
 def run_bot():
     # Define la dirección IP y el puerto del servidor
@@ -13,10 +16,6 @@ def run_bot():
 
         # Conecta el socket al servidor
         s.connect((host, port))
-
-        # Importa el módulo bot
-        filename = "bot.py"
-        bot.py = importlib.import_module(filename)
 
         # Ejecuta el bot
         bot.run()
@@ -49,4 +48,3 @@ def run_bot():
 
 if __name__ == "__main__":
     run_bot()
-
