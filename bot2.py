@@ -1,6 +1,6 @@
 import socket
 import subprocess
-
+ 
 def run():
     # Configuración de la dirección IP y el puerto
     ip = "192.168.249.128"  # Cambia esto por la IP deseada
